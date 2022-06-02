@@ -1,8 +1,9 @@
 name: DEB_PACKAGE
 on: 
  push:
-   tags:
-   - "*deb_v*"
+  branches: [ main ]
+  tags:
+    - "*deb_v*"
    
 jobs:
  build_and_release_deb:
