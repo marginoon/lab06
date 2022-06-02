@@ -1,7 +1,7 @@
 name: RPM_PACKAGE
-on:
+on: 
  push:
-   tags:
+  tags:
    - "*rpm_v*"
 jobs:
  build_and_release_rpm:
@@ -36,4 +36,3 @@ jobs:
        asset_path: solver_application/solver_output/solver-0.1.1-Linux.rpm
        asset_name: solver.rpm
        asset_content_type: application/rpm
-
