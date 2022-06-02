@@ -1,7 +1,6 @@
 name: DEB_PACKAGE
 on: 
  push:
-  branches: [ main ]
   tags:
     - "*deb_v*"
    
