@@ -1,8 +1,14 @@
 name: DEB_PACKAGE
 on: 
  push:
+ pull_request:
+  branches: [ main ]
   tags:
    - "*deb_v*"
+
+env:
+  BUILD_TYPE: Release
+  
 jobs:
  build_and_release_deb:
   runs-on: ubuntu-latest
