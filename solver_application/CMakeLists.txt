@@ -1,48 +1,18 @@
-cmake_minimum_required(VERSION 3.21)
+cmake_minimum_required(VERSION 3.4)
+project(lab06)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-option(CPACK_GENERATOR_DEB OFF)
-option(CPACK_GENERATOR_RPM OFF)
-option(CPACK_GENERATOR_MSI OFF)
-option(CPACK_GENERATOR_DMG OFF)
+include_directories("../formatter_lib")
+include_directories("../formatter_ex_lib")
+include_directories("../solver_lib")
+add_library(formatter_lib STATIC "../formatter_lib/formatter.cpp")
+add_library(formatter_ex_lib STATIC "../formatter_ex_lib/formatter_ex.cpp")
+add_library(solver_lib STATIC "../solver_lib/solver.cpp")
 
-project(solver)
 
 
-##############
 
-add_executable(solver equation.cpp)
-
-include_directories(../formatter_ex_lib ../solver_lib)
-
-add_subdirectory(../formatter_ex_lib formatter_ex)
-add_subdirectory(../solver_lib solver_lib)
-
-target_link_libraries(solver formatter_ex solver_lib)
-
-install(TARGETS solver RUNTIME DESTINATION bin)
-set(CPACK_SOURCE_GENERATOR "TGZ;ZIP")
-if(CPACK_GENERATOR_RPM)
-	set(CPACK_GENERATOR "RPM")
-endif()
-
-#########
-if(CPACK_GENERATOR_DEB)
-    set(CPACK_DEBIAN_PACKAGE_MAINTAINER "name")
-	set(CPACK_GENERATOR "DEB")
-endif()
-if(CPACK_GENERATOR_MSI)
-	set(CPACK_GENERATOR "WIX")
-endif()
-if(CPACK_GENERATOR_DMG)
-	set(MACOSX_BUNDLE TRUE)
-	set(CPACK_GENERATOR "DragNDrop")
-endif()
-include(CPack)
-unset(CPACK_GENERATOR_RPM CACHE)
-unset(CPACK_GENERATOR_DEB CACHE)
-unset(CPACK_GENERATOR_MSI CACHE)
-unset(CPACK_GENERATOR_DMG CACHE)
-
+add_executable(lab03 "equation.cpp")
+target_link_libraries(lab03 solver_lib formatter_ex_lib formatter_lib)
